@@ -17,9 +17,9 @@ void setup() {
 
 void loop() {
     debouncer.update();
-    light = map(analogRead(LDR),700,3600,0,255);
+    light = map(analogRead(LDR),700,3600,0,255); 
     if ( debouncer.fell() ) { 
-        count++;
+        count++;}
         if (count%8==0) {
           digitalWrite(RED,0);
           digitalWrite(YELLOW,0);
@@ -43,5 +43,5 @@ void loop() {
         } else if(count%8==7) {
           digitalWrite(GREEN,light);
         }
-    }
+    
 }
