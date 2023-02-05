@@ -4,7 +4,7 @@
 #define RED 26
 #define YELLOW 25
 #define GREEN 33
-
+#define LDR 34
 int count = 0;
 Bounce debouncer = Bounce();
 
@@ -17,17 +17,31 @@ void setup() {
 
 void loop() {
     debouncer.update();
+    light = map(analogRead(LDR),700,3600,0,255);
     if ( debouncer.fell() ) { 
         count++;
-        if (count==0){
-          
-        }
-        else if(count==1){
-          digitalWrite(GREEN,1);
-        }
-        else if(count==2){
-          digitalWrite(YELLOW,1);
+        if (count%8==0) {
+          digitalWrite(RED,0);
+          digitalWrite(YELLOW,0);
           digitalWrite(GREEN,0);
+        } else if(count%8==1) {
+          digitalWrite(GREEN,light);
+        } else if(count%8==2) {
+          digitalWrite(YELLOW,light);
+          digitalWrite(GREEN,0);
+        } else if(count%8==3) {
+          digitalWrite(GREEN,light);
+        } else if(count%8==4) {
+          digitalWrite(RED,light);
+          digitalWrite(YELLOW,0);
+          digitalWrite(GREEN,0);
+        } else if(count%8==5) {
+          digitalWrite(GREEN,light);
+        } else if(count%8==6) {
+          digitalWrite(YELLOW,light);
+          digitalWrite(GREEN,0);
+        } else if(count%8==7) {
+          digitalWrite(GREEN,light);
         }
     }
 }
